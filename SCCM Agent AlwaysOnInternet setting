@@ -1,0 +1,6 @@
+# Define the registry path and key name
+$registryPath = "HKLM:\SOFTWARE\Microsoft\CCM\Security"
+$keyName = "ClientAlwaysOnInternet"
+
+# Set the registry key value to 1
+Set-ItemProperty -Path $registryPath -Name $keyName -Value 1
