@@ -1,0 +1,52 @@
+ Import-Module ActiveDirectory
+
+# Define the filter and search base
+#DomainusersOu
+$filter = 'Enabled -eq $true'
+#SampleUsersa
+$Filtera = 'Enabled -eq $true'
+#SampleUsersb
+$Filterb = 'Enabled -eq $true'
+#SampleUsersc
+$Filterc = 'Enabled -eq $true'
+#SampleUsersd
+$Filterd = 'Enabled -eq $true'
+#SampleUserse
+$Filtere = 'Enabled -eq $true'
+#SampleUsersf
+$Filterf = 'Enabled -eq $true'
+
+$searchBase = "DC=us,DC=domain,DC=org"
+
+# Create an empty array to store all user objects
+$AllUsers = @()
+
+# Get AD users and select properties for each group
+$SampleUsersa = Get-ADUser -SearchBase $searchBase -Filter $FilterADM -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+$SampleUsersb = Get-ADUser -SearchBase $searchBase -Filter $FilterFIN -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+$SampleUsersc = Get-ADUser -SearchBase $searchBase -Filter $FilterHR -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+$SampleUsersd = Get-ADUser -SearchBase $searchBase -Filter $FilterIS -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+$SampleUserse = Get-ADUser -SearchBase $searchBase -Filter $FilterLGL -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+$SampleUsersf = Get-ADUser -SearchBase $searchBase -Filter $FilterMKT -Server <Domain.org> -Properties SamAccountName, UserPrincipalName, Name, mail | Select-Object SamAccountName, UserPrincipalName, Name, mail
+
+# Add the results to the array
+$AllUsers += $SampleUsersa
+$AllUsers += $SampleUsersb
+$AllUsers += $SampleUsersc
+$AllUsers += $SampleUsersd
+$AllUsers += $SampleUserse
+$AllUsers += $SampleUsersf
+
+
+# Export all users to a single CSV file
+$AllUsers | Export-Csv -Path "C:\Scripts\AllUsers.csv" -NoTypeInformation
+
+# Display the results for each group of users in a table format
+$SamepleUsersa | Format-Table
+$SamepleUsersb | Format-Table
+$SamepleUsersc | Format-Table
+$SamepleUsersd | Format-Table
+$SamepleUserse | Format-Table
+$SamepleUsersf | Format-Table
+
+ 
