@@ -1,0 +1,6 @@
+$DaysInactive = 30
+$time = (Get-Date).AddDays(-$DaysInactive)
+$ComputerList = Get-ADComputer -Filter {LastLogonTimeStamp -lt $time} -SearchBase "OU=Sample,DC=us,DC=domain,DC=org" -Properties Name, LastLogonDate, Enabled | Select-Object Name, LastLogonDate, Enabled
+
+echo $ComputerList
+ 
